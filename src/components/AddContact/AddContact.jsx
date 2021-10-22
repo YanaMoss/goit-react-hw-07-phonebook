@@ -1,20 +1,19 @@
 import { useState } from 'react';
-// import { connect } from 'react-redux';
-// import { addContact } from '../../redux/phonebook-actions';
+import { useAddContactMutation } from '../../redux/phonebook-operation';
 import inputForms from '../data/inputForms.json';
 import { Form } from './AddContactForm.styled';
 import { Label } from './AddContactForm.styled';
 import { Input } from './AddContactForm.styled';
 import { ButtonPhonebook } from '../Button/Button.styled';
-import { useAddContact } from '../../services/phonebook-api';
 
-export function AddContact() {
+export default function AddContact() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  // const [addContact] = useAddContact();
-  console.log(useAddContact);
+  const [addContact] = useAddContactMutation();
 
-  function handleChange({ name }, value) {
+  console.log('name', name);
+  console.log('number', number);
+  const handleChange = ({ name }, value) => {
     switch (name) {
       case 'name':
         setName(() => value);
@@ -25,11 +24,13 @@ export function AddContact() {
       default:
         break;
     }
-  }
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    // addContact({ name, number });
+    console.log('name onSubmit', name);
+    console.log('number onSubmit', number);
+    addContact({ name, number });
     reset(e);
   };
   const reset = e => {
@@ -60,5 +61,3 @@ export function AddContact() {
     </Form>
   );
 }
-
-export default AddContact;

@@ -6,7 +6,6 @@ import { Input } from '../AddContact/AddContactForm.styled';
 
 export function FindContact({ title }) {
   const dispatch = useDispatch();
-
   return (
     <div>
       <h3>{title}</h3>

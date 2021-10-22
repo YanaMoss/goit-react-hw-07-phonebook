@@ -1,18 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import phonebookReducer from './phonebook-reducer';
-import { setupListeners } from '@reduxjs/toolkit/dist/query';
-import { phonebookApi } from '../services/phonebook-api';
+import { setupListeners } from '@reduxjs/toolkit/query';
+import { phonebookApi } from './phonebook-operation';
 import { filter } from './phonebook-reducer';
+// import phonebookReducer from './phonebook-reducer';
 
 const store = configureStore({
   reducer: {
     [phonebookApi.reducerPath]: phonebookApi.reducer,
     filter,
   },
-
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(phonebookApi.middleware),
 });
 setupListeners(store.dispatch);
-// eslint-disable-next-line import/no-anonymous-default-export
+// const store = configureStore({
+//   reducer: {
+//     phonebook: phonebookReducer,
+//   },
+// });
+
 export default store;
